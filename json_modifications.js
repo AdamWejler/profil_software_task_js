@@ -1,5 +1,5 @@
-function read_json() {
-	return fetch('https://www.reddit.com/r/funny.json')
+function read_json(url) {
+	return fetch(url)
 	  .then(response => response.json())
 	  .then(data => {
 	  	return data;
@@ -99,9 +99,12 @@ function select_last_24h_posts(json_object) {
 	return json_object;
 }
 
-read_json().then( function(result) {
+read_json('https://www.reddit.com/r/funny.json').then( function(result) {
 	// console.log( transform_json(result) );
 	// console.log( sort( transform_json(result), 'created' ) );
 	// console.log( greatest_votes_per_comment( transform_json(result) ) );
 	console.log( select_last_24h_posts( transform_json(result) ) );
 });
+
+// Uncomment below to anable tests
+// module.exports = { read_json, transform_json, string_date_to_number, sort, greatest_votes_per_comment, string_date_to_date, select_last_24h_posts };
